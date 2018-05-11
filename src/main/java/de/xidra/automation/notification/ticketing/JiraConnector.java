@@ -19,11 +19,15 @@ import org.apache.http.HttpEntity;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,5 +88,35 @@ public class JiraConnector extends BaseConnector
         return false;
 
     }
+
+    public void updateTicket(String ticketNo,String message)
+    {
+        try (CloseableHttpClient httpclient = createHttpClient())
+        {
+            HttpPost httpPost = new HttpPost(url + ENDPOINT_ISSUE + ticketNo + "/comment");
+
+
+            addHeaderForCredentials(httpPost);
+
+
+            String data = "{\"body\": \" " + message + "\"}";
+            StringEntity params =new StringEntity(data);
+            params.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            httpPost.setHeader("Accept", "application/json");
+
+            httpPost.setEntity(params);
+
+            try (CloseableHttpResponse response2 = httpclient.execute(httpPost)) {
+                log.info("{} updating ticket with message {} was {}", ticketNo, message, response2.getStatusLine().toString());
+                HttpEntity entity2 = response2.getEntity();
+            }
+
+        }
+        catch (Exception e)
+        {
+            log.error("{} unable to update ticket with message",ticketNo,e);
+        }
+    }
+
 
 }

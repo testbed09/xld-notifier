@@ -28,9 +28,9 @@ public class XLDeployClient implements Serializable
 
     public Optional<String> getTicketIDForApplicationAndEnvironment(String application, String environment)
     {
-        logger.info("getting TicketNo for {} and {}",application,environment);
+        logger.info("getting TicketNo for {} and {}, sending request to {}/deployit/repository/ci/{}",
+                application,environment,url,environment);
         String ticketNo = null;
-
         try
         {
             HttpResponse<String> jsonResponse = Unirest.get(url +"/deployit/repository/ci/" + environment)
@@ -38,7 +38,7 @@ public class XLDeployClient implements Serializable
                     .basicAuth(user, password)
                     .asString();
             if (jsonResponse.getStatus() != 200) {
-                logger.debug("Failed to push event to bot, status code " + jsonResponse.getStatusText());
+                logger.debug("Failed to retrieve ticket number from XLDeploy, status code {}" , jsonResponse.getStatusText());
             }
             String info = jsonResponse.getBody();
             logger.info(info);
