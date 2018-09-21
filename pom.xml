@@ -5,6 +5,52 @@
   <artifactId>xld-notifier-XLR-test</artifactId>
   <packaging>jar</packaging>
   <version>1.4</version>
+
+    <profiles>
+        <profile>
+            <id>development-install</id>
+            <!--  Configuration for Dev Nexus. Used if "install" goal is activated -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <skipUpload>false</skipUpload>
+                <nexusHost>ec2-54-93-56-29.eu-central-1.compute.amazonaws.com</nexusHost>
+                <httpSchema>http</httpSchema>
+                <nexusPort>9080</nexusPort>
+                <nexusUser>admin</nexusUser>
+                <nexusPassword></nexusPassword>
+                <nexusRepository>Xidra_Staging</nexusRepository>
+            </properties>
+        </profile>
+        <profile>
+            <id>release-install</id>
+            <properties>
+                <skipUpload>false</skipUpload>
+                <nexusHost>ec2-54-93-56-29.eu-central-1.compute.amazonaws.com</nexusHost>
+                <httpSchema>http</httpSchema>
+                <nexusPort>9080</nexusPort>
+                <nexusUser>admin</nexusUser>
+                <nexusPassword></nexusPassword>
+                <nexusRepository>Xidra_Release</nexusRepository>
+            </properties>
+        </profile>
+        <profile>
+            <id>workstation-no-upload</id>
+            <properties>
+                <skipUpload>true</skipUpload>
+                <nexusHost>none</nexusHost>
+                <httpSchema>http</httpSchema>
+                <nexusPort>0</nexusPort>
+                <nexusUser>none</nexusUser>
+                <keyPass>none</keyPass>
+                <httpsCertificateLocation>none</httpsCertificateLocation>
+                <nexusPassword>none</nexusPassword>
+                <nexusRepository>none</nexusRepository>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -14,6 +60,64 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <gitDescribe>
+                        <tags>true</tags>
+                        <always>true</always>
+                        <abbrev>7</abbrev>
+                        <forceLongFormat>true</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.1</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <!-- implementation is needed only for Maven 2 -->
+                                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <!-- implementation is needed only for Maven 2 -->
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.50</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                            <excludes>
+                                <exclude>**/java/com/commerzbank/cdp/scmdb/rest/resource/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

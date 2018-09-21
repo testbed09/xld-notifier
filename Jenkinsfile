@@ -171,11 +171,11 @@ pipeline {
 	}
     post {
         always {
-            junit 'target/surefire-reports/TEST-*.xml'
+            //junit 'target/surefire-reports/TEST-*.xml'
         }
         success {
-            archive 'target/*.jar'
-            archive 'target/delivery.zip'
+            //archive 'target/*.jar'
+            //archive 'target/delivery.zip'
         }
         changed {
             sendNotification buildChanged:true
