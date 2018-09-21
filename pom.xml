@@ -113,7 +113,7 @@
                                 </rule>
                             </rules>
                             <excludes>
-                                <exclude>**/java/com/commerzbank/cdp/scmdb/rest/resource/**</exclude>
+                                <exclude>**/java/de/xidra/automation/notification/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>
