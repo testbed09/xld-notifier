@@ -140,35 +140,35 @@
          <artifactId>engine-spi</artifactId>
          <scope>system</scope>
          <version>2017.7.0</version>
-         <systemPath>/home/ec2-user/libs/engine-spi-2017.7.0.jar</systemPath>
+         <systemPath>/var/libs/engine-spi-2017.7.0.jar</systemPath>
       </dependency>
       <dependency>
          <groupId>com.xebialabs.xldeploy</groupId>
          <artifactId>udm-plugin-api</artifactId>
          <scope>system</scope>
          <version>2017.7.0</version>
-         <systemPath>/home/ec2-user/libs/udm-plugin-api-2017.7.0.jar</systemPath>
+         <systemPath>/var/libs/udm-plugin-api-2017.7.0.jar</systemPath>
       </dependency>
       <dependency>
          <groupId>com.xebialabs.xldeploy</groupId>
          <artifactId>engine-api</artifactId>
          <scope>system</scope>
          <version>2017.7.0</version>
-         <systemPath>/home/ec2-user/libs/engine-api-2017.7.0.jar</systemPath>
+         <systemPath>/var/libs/engine-api-2017.7.0.jar</systemPath>
       </dependency>
       <dependency>
           <groupId>com.xebialabs.xldeploy</groupId>
           <artifactId>xl-repository-jcr</artifactId>
           <scope>system</scope>
           <version>2017.7.0</version>
-          <systemPath>/home/ec2-user/libs/xl-repository-jcr-2017.7.0.jar</systemPath>
+          <systemPath>/var/libs/xl-repository-jcr-2017.7.0.jar</systemPath>
       </dependency>
       <dependency>
          <groupId>nl.javadude.t2bus</groupId>
          <artifactId>t2-bus</artifactId>
          <scope>system</scope>
          <version>1.2.1</version>
-         <systemPath>/home/ec2-user/libs/t2-bus-1.2.1.jar</systemPath>
+         <systemPath>/var/libs/t2-bus-1.2.1.jar</systemPath>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
