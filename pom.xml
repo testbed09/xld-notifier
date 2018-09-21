@@ -154,7 +154,7 @@
          <artifactId>engine-api</artifactId>
          <scope>system</scope>
          <version>2017.7.0</version>
-         <systemPath>/home/ec2-user/libs/lib/engine-api-2017.7.0.jar</systemPath>
+         <systemPath>/home/ec2-user/libs/engine-api-2017.7.0.jar</systemPath>
       </dependency>
       <dependency>
           <groupId>com.xebialabs.xldeploy</groupId>
