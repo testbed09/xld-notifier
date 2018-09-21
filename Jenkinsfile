@@ -49,6 +49,7 @@ pipeline {
         projectName = 'xld-notifier-XLR-test'
         projectVersion = '0.2'
         gitTag = sh(returnStdout: true, script: "git tag --contains").trim()
+        sh "echo in environment"
     }
     agent any
     stages {
