@@ -4,8 +4,20 @@
   <groupId>de.xidra.automation.integration</groupId>
   <artifactId>xld-notifier-XLR-test</artifactId>
   <packaging>jar</packaging>
-  <version>1.4</version>
+  <version>1.4-SNAPSHOT</version>
 
+    <distributionManagement>
+        <repository>
+            <id>nexus.release</id>
+            <name>MyCo Internal Repository</name>
+            <url>http://ec2-54-93-56-29.eu-central-1.compute.amazonaws.com:9000/nexus/content/repositories/Xidra_Release</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus.snapshots</id>
+            <url>http://ec2-54-93-56-29.eu-central-1.compute.amazonaws.com:9000/nexus/content/repositories/Xidra_Staging</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
     <profiles>
         <profile>
             <id>development-install</id>
